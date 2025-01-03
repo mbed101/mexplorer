@@ -17,8 +17,6 @@ class MyWindow(QMainWindow):
         #self.settings = self.load_settings(self.settings_file_name)
         
         self.setWindowTitle("MExplorer")
-        # self.setGeometry(100,100,300,200)
-        #self.setFixedSize(300,200)
         self.showMaximized()
 
         central_widget = QWidget()
@@ -39,12 +37,12 @@ class MyWindow(QMainWindow):
         self.ltree_view = QTreeView(self)
 
         # Create a QFileSystemModel to display the file system
-        model = QFileSystemModel()
-        model.setRootPath(QDir.rootPath())  # Set the root path to display
+        lmodel = QFileSystemModel()
+        lmodel.setRootPath(QDir.homePath())
 
         # Set the model for the tree view
-        self.ltree_view.setModel(model)
-        self.ltree_view.setRootIndex(model.index(QDir.rootPath()))  # Set the root index
+        self.ltree_view.setModel(lmodel)
+        self.ltree_view.setRootIndex(lmodel.index(QDir.homePath()))  # Set the root index
 
         layout.addWidget(self.ltree_view)
 
@@ -52,12 +50,12 @@ class MyWindow(QMainWindow):
         self.rtree_view = QTreeView(self)
 
         # Create a QFileSystemModel to display the file system
-        model = QFileSystemModel()
-        model.setRootPath(QDir.rootPath())  # Set the root path to display
+        rmodel = QFileSystemModel()
+        rmodel.setRootPath(QDir.homePath())  # Set the root path to display
 
         # Set the model for the tree view
-        self.rtree_view.setModel(model)
-        self.rtree_view.setRootIndex(model.index(QDir.rootPath()))  # Set the root index
+        self.rtree_view.setModel(rmodel)
+        self.rtree_view.setRootIndex(rmodel.index(QDir.homePath()))  # Set the root index
         layout.addWidget(self.rtree_view)
 
 
