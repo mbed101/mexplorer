@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWidget,QLineEdit,QGraphicsView,QTreeView, QFileSystemModel
+from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QHBoxLayout, QVBoxLayout, QWidget,QLineEdit,QGraphicsView,QTreeView, QFileSystemModel
 import PySide6.QtCore 
 from PySide6.QtGui import QFont, QIntValidator, QPainter
 from PySide6.QtCore import QTimer,  QDir
@@ -24,7 +24,7 @@ class MyWindow(QMainWindow):
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
 
-        layout = QVBoxLayout()
+        layout = QHBoxLayout()
         central_widget.setLayout(layout)
 
         self.current_path = "."
@@ -36,17 +36,30 @@ class MyWindow(QMainWindow):
         layout.addWidget(self.label)
 
          # Create a QTreeView
-        self.tree_view = QTreeView(self)
+        self.ltree_view = QTreeView(self)
 
         # Create a QFileSystemModel to display the file system
         model = QFileSystemModel()
         model.setRootPath(QDir.rootPath())  # Set the root path to display
 
         # Set the model for the tree view
-        self.tree_view.setModel(model)
-        self.tree_view.setRootIndex(model.index(QDir.rootPath()))  # Set the root index
+        self.ltree_view.setModel(model)
+        self.ltree_view.setRootIndex(model.index(QDir.rootPath()))  # Set the root index
 
-        layout.addWidget(self.tree_view)
+        layout.addWidget(self.ltree_view)
+
+        # Right tab
+        self.rtree_view = QTreeView(self)
+
+        # Create a QFileSystemModel to display the file system
+        model = QFileSystemModel()
+        model.setRootPath(QDir.rootPath())  # Set the root path to display
+
+        # Set the model for the tree view
+        self.rtree_view.setModel(model)
+        self.rtree_view.setRootIndex(model.index(QDir.rootPath()))  # Set the root index
+        layout.addWidget(self.rtree_view)
+
 
     def save_settings(self,settings, file_path):
         with open(file_path, 'w') as config_file:
